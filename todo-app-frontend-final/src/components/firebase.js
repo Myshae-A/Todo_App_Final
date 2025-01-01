@@ -6,14 +6,14 @@ import { getAuth } from "firebase/auth";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyCMRBEA8z7ME-SD8ZJSxXBre2yaSM1Tobs",
-    authDomain: "todo-app-wk7.firebaseapp.com",
-    projectId: "todo-app-wk7",
-    storageBucket: "todo-app-wk7.firebasestorage.app",
-    messagingSenderId: "706831287109",
-    appId: "1:706831287109:web:0a2f91e5701f9ec79e342c",
-    measurementId: "G-MVXLPPEEL3"
-};
+    apiKey: "AIzaSyCz-5dfH4vsVYfwFIxKtbRCHAj_FulKKjE",
+    authDomain: "todo-app-final-de848.firebaseapp.com",
+    projectId: "todo-app-final-de848",
+    storageBucket: "todo-app-final-de848.firebasestorage.app",
+    messagingSenderId: "425939452656",
+    appId: "1:425939452656:web:6437e4e78f1285cd3cf835",
+    measurementId: "G-V7M7SWTQHE"
+  };
 
 // Initialize Firebase Client SDK
 const app = initializeApp(firebaseConfig);

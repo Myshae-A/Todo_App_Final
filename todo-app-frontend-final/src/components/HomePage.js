@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   Container,
   Typography,
@@ -46,6 +46,9 @@ export default function HomePage() {
 
   const [isLoading, setIsLoading] = useState(true); // Track loading state
 
+  // let isMounted = true;
+  const isMounted = useRef(true);
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if(user) {
@@ -71,26 +74,9 @@ export default function HomePage() {
   // to fetch the list of tasks instead of using the hardcoded data.
 
   useEffect(() => {
-    let isMounted = true;
-    //console.log("use effect ran-through")
-    //console.log("is null 1? : "+(currentUser))
     if (!isLoading && currentUser == null) {
       navigate('/login');
     } else {
-      // fetch(`http://localhost:3001/users/${currentUser}/tasks`)
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //     // console.log("new one here work")
-      //     // console.log(currentUser)
-      //     // console.log("is null 2? : "+(currentUser == null))
-          
-      //     setTaskList(data);
-      //     console.log("use effect here : "+data)
-      //     // setCurrentUser(currentUser)
-      //   })
-      //   .catch((error) => {
-      //     console.error('use effect FAILED TO FETCH: ', error);
-      //   })
         fetch(`http://localhost:3001/users/${currentUser}/tasks`)
         .then((response) => {
           if (!response.ok) {
@@ -99,10 +85,14 @@ export default function HomePage() {
           return response.json();
         })
         .then((data) => {
-          if(isMounted) {
+          // console.log(isMounted)
+          // console.log(data+"\n")
+          // if(isMounted.current && data.length > 0) {
+          if(data.length > 0) {
             setTaskList(data); // Update taskList with the fetched data
-            isMounted = false;
-            console.log("use effect here : "+data)
+            // isMounted = false;
+            isMounted.current = false; // Prevent further updates
+            // console.log("use effect here : "+data)
           }
           
         })

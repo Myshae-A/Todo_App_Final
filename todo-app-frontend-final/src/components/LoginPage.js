@@ -45,7 +45,9 @@ function LoginPage() {
     // TODO: Add Firebase signup with email/password functionality here.
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, registerEmail, registerPassword)
-      console.log('ACCOUNT CREATED: '+userCredential.user)
+      setRegisterEmail('')
+      setRegisterPassword('')
+      console.log('ACCOUNT CREATED: '+userCredential.user.email)
     } catch (error) {
       console.error("SIGNUP ERROR: ", error.message)
     }
