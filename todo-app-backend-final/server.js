@@ -30,6 +30,16 @@ app.use(express.json())
 
 let tasks = [];
 
+// Sample endpoint
+app.get('/message', (req, res) => {
+  console.log("GET endpoint contacted")
+  res.json({ message: 'Hello from the server!' });
+});
+
+app.get('/', (req, res) => {
+  res.json({ message: 'Hello World!' });
+}) 
+
 // GET: Endpoint to retrieve all tasks
 app.get("/users/:userId/tasks", async (req, res) => {
   try {
