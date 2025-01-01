@@ -5,7 +5,7 @@ import bodyParser from 'body-parser';
 //const bodyParser = require("body-parser");
 import cors from 'cors';
 //const cors = require("cors");
-console.log("testing")
+// console.log("testing")
 
 // Creating an instance of Express // created an express server
 const app = express();
@@ -32,7 +32,7 @@ let tasks = [];
 
 
 // testing more
-module.exports = (req, res) => {
+export default (req, res) => {
   res.status(200).json({ message: 'Hello, world!' });
 };
 
@@ -44,7 +44,7 @@ app.get('/message', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.json({ message: 'Hello World!' });
+  res.json({ message: 'Hello World (from endpoint)!' });
 }) 
 
 // GET: Endpoint to retrieve all tasks

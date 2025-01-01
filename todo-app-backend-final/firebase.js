@@ -20,7 +20,7 @@ dotenv.config();
 
 // const creds = JSON.parse(process.env.FIREBASE_CREDENTIALS);
 
-const firebaseConfig = {
+const creds = {
   type: process.env.FIREBASE_TYPE,
   project_id: process.env.FIREBASE_PROJECT_ID,
   private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID,
