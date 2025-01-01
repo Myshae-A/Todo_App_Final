@@ -1,41 +1,29 @@
 // Importing required modules
-//const express = require("express");
 import express from 'express';
 import bodyParser from 'body-parser';
-//const bodyParser = require("body-parser");
 import cors from 'cors';
-//const cors = require("cors");
-// console.log("testing")
-
-// Creating an instance of Express // created an express server
-const app = express();
-
-// Loading environment variables from a .env file into process.env
-// require("dotenv").config();
-import dotenv from 'dotenv';
-dotenv.config();
-
-
-// Importing the Firestore database instance from firebase.js
-// const db = require("./firebase");
 import db from './firebase.js';
+import dotenv from 'dotenv';
 
-
-// Middlewares to handle cross-origin requests and to parse the body of incoming requests to JSON
+dotenv.config();
+const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+// const express = require('express');
+// const cors = require('cors');
+// const db = require('./firebase.js');
+// require('dotenv').config();
+
 // Your API routes will go here...
-app.use(express.json())
+// app.use(express.json())
 
 let tasks = [];
-
 
 // testing more
 export default (req, res) => {
   res.status(200).json({ message: 'Hello, world!' });
 };
-
 
 // Sample endpoint
 app.get('/message', (req, res) => {
