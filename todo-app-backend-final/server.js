@@ -26,17 +26,17 @@ export default (req, res) => {
 };
 
 // Sample endpoint
-app.get('/message', (req, res) => {
+app.get('/api/message', (req, res) => {
   console.log("GET endpoint contacted")
   res.json({ message: 'Hello from the server!' });
 });
 
-app.get('/', (req, res) => {
+app.get('/api/', (req, res) => {
   res.json({ message: 'Hello World (from endpoint)!' });
 }) 
 
 // GET: Endpoint to retrieve all tasks
-app.get("/users/:userId/tasks", async (req, res) => {
+app.get("/api/users/:userId/tasks", async (req, res) => {
   try {
     const { userId } = req.params; // don't forget this part when trying to get userId
 
@@ -70,7 +70,7 @@ app.get("/users/:userId/tasks", async (req, res) => {
 
 // CREATE
 // POST: Endpoint to add a new task
-app.post("/users/:userId/tasks", async (req, res) => {
+app.post("/api/users/:userId/tasks", async (req, res) => {
   const newTask = req.body;
   try {
     // console.log("starting try")
@@ -96,7 +96,7 @@ app.post("/users/:userId/tasks", async (req, res) => {
 });
 
 // DELETE: Endpoint to remove a task
-app.delete('/users/:userId/tasks/:taskId', async (req, res) => {
+app.delete('/api/users/:userId/tasks/:taskId', async (req, res) => {
   const taskId = req.params.taskId;
   const { userId } = req.params;
   if(taskId === undefined) {
