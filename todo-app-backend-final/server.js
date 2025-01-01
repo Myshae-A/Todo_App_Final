@@ -20,6 +20,10 @@ app.use(bodyParser.json()); // must keep this...
 
 let tasks = [];
 
+app.use("/", (req, res) => {
+  res.send("Server is running, hello world!");
+})
+
 // testing more
 export default (req, res) => {
   res.status(200).json({ message: 'Hello, world!' });
