@@ -30,6 +30,13 @@ app.use(express.json())
 
 let tasks = [];
 
+
+// testing more
+module.exports = (req, res) => {
+  res.status(200).json({ message: 'Hello, world!' });
+};
+
+
 // Sample endpoint
 app.get('/message', (req, res) => {
   console.log("GET endpoint contacted")
