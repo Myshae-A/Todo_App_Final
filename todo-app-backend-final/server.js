@@ -16,7 +16,7 @@ app.use(bodyParser.json()); // must keep this...
 // require('dotenv').config();
 
 // Your API routes will go here...
-// app.use(express.json())
+app.use(express.json())
 
 let tasks = [];
 
