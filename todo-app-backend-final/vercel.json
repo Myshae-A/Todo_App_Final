@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "name": "backend",
+    "name": "todo-app-backend-final",
     "builds": [
       { "src": "server.js", "use": "@vercel/node" }
     ],
