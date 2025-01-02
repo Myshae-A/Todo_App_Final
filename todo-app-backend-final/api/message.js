@@ -1,4 +1,4 @@
-export default (req, res) => {
+export default async function handler(req, res) {
     if( req.method == 'GET' ) {
         console.log("GET (message) endpoint contacted")
         res.json({ message: 'Hello from the server (message.js)!' });
