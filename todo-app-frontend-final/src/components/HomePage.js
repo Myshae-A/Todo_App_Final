@@ -143,6 +143,7 @@ export default function HomePage() {
         // setRefreshCount(refreshCount + 1)
         // setRendering(rendering + 1)
         // console.log("rendering: "+rendering)
+        setCurrentUser("")
         setCurrentUser(currentUserRefresh) // testing new Jan 2025
         setNewTaskName("") // clears the input field
         //console.log("new task added -- passed through")
@@ -176,6 +177,7 @@ export default function HomePage() {
       })
       // console.log("task deleted -- passed through")
       // setRendering(rendering + 1)
+      setCurrentUser("")
       setCurrentUser(currentUserRefresh) // testing new Jan 2025
   }
 
