@@ -11,7 +11,7 @@ app.use(cors());
 app.use(bodyParser.json()); // must keep this...
 
 
-// enable CORS for specific routes or origins
+// enable CORS for specific routes or origins ??
 app.use(cors({
   origin: 'https://todo-app-final-frontend.vercel.app' // Allow only this origin
 }));
@@ -83,8 +83,8 @@ app.post("/users/:userId/tasks", async (req, res) => {
     //   user: newTask.user
     // });
     // Sending a successful response with the new task ID
-    res.status(201).send("worked! "+{ id: docRef.id, ...newTask });
-    //res.status(201).json({ id: docRef.id, ...newTask });
+    //res.status(201).send("worked! "+{ id: docRef.id, ...newTask });
+    res.status(201).json({ id: docRef.id, ...newTask });
     //console.log("ending try")
 
   } catch (error) {
