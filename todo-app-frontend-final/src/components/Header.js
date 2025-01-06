@@ -21,8 +21,7 @@ function Header() {
     >
       <Toolbar>
         <Typography variant="h4" sx={{ flexGrow: 1 }} fontWeight='bold'>
-          { currentUser ? `${currentUser.email.substring(0,currentUser.email.indexOf('@'))}'s To-Do List`
-          : "Guest's To-Do List" }
+          { `${currentUser.email.substring(0,currentUser.email.indexOf('@'))}'s To-Do List` }
         </Typography>
         <Button
           onClick={logout}
