@@ -15,24 +15,9 @@ app.use(bodyParser.json()); // must keep this...
 app.use(cors({
   origin: 'https://todo-app-final-frontend.vercel.app' // Allow only this origin
 }));
-// const express = require('express');
-// const cors = require('cors');
-// const db = require('./firebase.js');
-// require('dotenv').config();
 
 // Your API routes will go here...
 app.use(express.json())
-
-// let tasks = [];
-
-// app.use("/", (req, res) => {
-//   res.send("Server is running, hello world!");
-// })
-
-// testing more
-// export default (req, res) => {
-//   res.status(200).json({ message: 'Hello, world!' });
-// };
 
 // GET: Endpoint to retrieve all tasks
 app.get("/users/:userId/tasks", async (req, res) => {
@@ -60,52 +45,17 @@ app.get("/users/:userId/tasks", async (req, res) => {
   }
 });
 
-// GET: Endpoint to retrieve all tasks for a user
-// app.get('/users/:userId/tasks/:taskId', async (req, res) => {
-//   const userId = req.params.userId;
-//   const userTasks = tasks.filter(task => task.userId === userId);
-//   res.status(200).send(userTasks+" number 3");
-// });
-
 // CREATE
 // POST: Endpoint to add a new task
 app.post("/users/:userId/tasks", async (req, res) => {
   const newTask = req.body;
   try {
-    // console.log("starting try")
     const { userId } = req.params;
-    
-    // let tasks = [];
     // Adding the new task to the "tasks" collection in Firestore
     const docRef = await db.collection("users").doc(userId).collection("tasks").add(newTask);
-    // const docRef = await addDoc(collection(db, "tasks"), {
-    //   finished: false,
-    //   text: newTask.text,
-    //   user: newTask.user
-    // });
-
-    //const tasksSnapshot = await db.collection("users").doc(userId).collection("tasks").get();
-
-    // Mapping Firestore data to an array of task objects
-    // const tasks = tasksSnapshot.docs.map(doc => ({
-    //   id: doc.id,
-    //   ...doc.data(),
-    // }));
     const taskData = { id: docRef.id, ...newTask }; // Ensure task data includes the name
     res.status(201).send(taskData);  // Send the complete task back
-    
-    // Sending a successful response with the tasks data
-    // console.log("tasks backend: "+tasks)
-    // res.status(200).send(tasks);
-
-    // res.status(201).json(tasks);
-    // Sending a successful response with the new task ID
-    //res.status(201).send("worked! "+{ id: docRef.id, ...newTask });
-    //res.status(201).json({ id: docRef.id, ...newTask });
-    //console.log("ending try")
-
   } catch (error) {
-    //console.log("starting catch")
     // Sending an error response in case of an exception
     res.status(500).send(error.message);
   }
@@ -122,7 +72,6 @@ app.delete('/users/:userId/tasks/:taskId', async (req, res) => {
   const taskRef = db.collection("users").doc(userId).collection("tasks").doc(taskId);
   // Delete the document with the given taskId
   await taskRef.delete();
-  //tasks = tasks.filter(task => task.id !== taskId);
   res.status(200).send(taskRef);
   // res.status(200).send(`taskId: ${taskId} is deleted!!!`);
 });

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState} from "react";
 import {
   Container,
   Typography,
@@ -13,42 +13,17 @@ import {
 } from "@mui/material";
 import Header from "./Header";
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
 import { auth } from "./firebase";
 import { onAuthStateChanged } from 'firebase/auth';
-import {
-  query,
-  collection,
-  onSnapshot,
-  updateDoc,
-  doc,
-  addDoc,
-  deleteDoc
-} from 'firebase/firestore'
-
-// Importing the Firestore database instance from firebase.js
-//const db = require("./firebase");
-import db from "./firebase";
 
 export default function HomePage() {
   const navigate = useNavigate();
-  //const currentUser = useAuth();
-  // const [currentUser, setCurrentUser] = useState(useAuth());
-
   const [currentUser, setCurrentUser] = useState(null)
   // State to hold the list of tasks.
   const [taskList, setTaskList] = useState([]);
-
   // State for the task name being entered by the user.
   const [newTaskName, setNewTaskName] = useState("");
-
-  // const [rendering, setRendering] = useState(0);
-
   const [isLoading, setIsLoading] = useState(true); // Track loading state
-
-  // let currentUserRefresh = "";
-  // let isMounted = true;
-  // const isMounted = useRef(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -68,12 +43,6 @@ export default function HomePage() {
     return () => unsubscribe();
   }, [navigate]);
 
-  // console.log("88: "+currentUser)
-
-  // TODO: Support retrieving your todo list from the API.
-  // Currently, the tasks are hardcoded. You'll need to make an API call
-  // to fetch the list of tasks instead of using the hardcoded data.
-
   useEffect(() => {
     if (!isLoading && currentUser == null) {
       navigate('/login');
@@ -86,16 +55,9 @@ export default function HomePage() {
           return response.json();
         })
         .then((data) => {
-          // console.log(isMounted)
-          // console.log(data+"\n")
-          // if(isMounted.current && data.length > 0) {
           if(data.length > 0) {
-            // currentUserRefresh = currentUser;
-            // console.log(currentUserRefresh)
             setTaskList(data); // Update taskList with the fetched data
-            // isMounted = false;
-            // isMounted.current = false; // Prevent further updates
-            console.log("1.0 use effect here : "+data)
+            // console.log("1.0 use effect here : "+data)
           }
           
         })
@@ -105,24 +67,10 @@ export default function HomePage() {
       }
   }, [currentUser]);
 
-    // Function to compute a message indicating how many tasks are unfinished.
-    // function updateRendering(data) {
-    //   setTaskList(data)
-    // }
-
-  // if (isLoading) {
-  //   return <div>Loading...</div>; // Show a loading indicator
-  // }
-
   // CREATE
   function handleAddTask() {
     // Check if task name is provided and if it doesn't already exist.
     if (newTaskName && !taskList.some((task) => task.name === newTaskName)) {
-
-      // TODO: Support adding todo items to your todo list through the API.
-      // In addition to updating the state directly, you should send a request
-      // to the API to add a new task and then update the state based on the response.
-      //console.log(currentUser.id);
       fetch(`https://todo-app-final-delta.vercel.app/users/${currentUser}/tasks`, {
         method: 'POST',
         headers: {
@@ -138,21 +86,14 @@ export default function HomePage() {
       .then((response) => response.json())
       .then((data) => {
         setTaskList((prevTaskList) => [...prevTaskList, data]);
-        console.log("2.0 use effect here : "+data)
-        // console.log("handle add tak : "+taskList)
+        // console.log("2.0 use effect here : "+data)
       })
       .catch((error) => {
         console.log("currentUser: "+currentUser)
         console.error('FAILED TO POST: ', error);
       })
-      // setRefreshCount(refreshCount + 1)
-      // setRendering(rendering + 1)
-      // console.log("rendering: "+rendering)
-      // setCurrentUser("gtDtrsA8tO7j2RpgGpo7")
-      // setCurrentUser(currentUserRefresh) // testing new Jan 2025
       setNewTaskName("") // clears the input field
       //console.log("new task added -- passed through")
-      // updateRendering(taskList);
     } else if (taskList.some((task) => task.name === newTaskName)) {
       alert("Task already exists!");
     } else {
@@ -164,10 +105,6 @@ export default function HomePage() {
   // Function to toggle the 'finished' status of a task.
   function toggleTaskCompletion(task) {
 
-    // TODO: Support removing/checking off todo items in your todo list through the API.
-    // Similar to adding tasks, when checking off a task, you should send a request
-    // to the API to update the task's status and then update the state based on the response.
-
     fetch(`https://todo-app-final-delta.vercel.app/users/${currentUser}/tasks/${task.id}`, {
       method: 'DELETE'
     })
@@ -175,18 +112,11 @@ export default function HomePage() {
     .then(() => {
       const updatedTaskList = taskList.filter((existingTask) => existingTask.id !== task.id)
       setTaskList(updatedTaskList)
-      console.log("3.0 use effect here : "+updatedTaskList)
-      // console.log("toggle task : "+taskList)
+      // console.log("3.0 use effect here : "+updatedTaskList)
     })
     .catch((error) => {
       console.error('FAILED TO DELETE: ', error);
     })
-    // console.log("task deleted -- passed through")
-    // setRendering(rendering + 1)
-    // setNewTaskName("")
-    // setCurrentUser("gtDtrsA8tO7j2RpgGpo7")
-    // updateRendering(taskList);
-    // setCurrentUser(currentUserRefresh) // testing new Jan 2025
   }
 
   // Function to compute a message indicating how many tasks are unfinished.
