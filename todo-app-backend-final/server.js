@@ -78,7 +78,12 @@ app.post("/users/:userId/tasks", async (req, res) => {
     // let tasks = [];
     // Adding the new task to the "tasks" collection in Firestore
     const docRef = await db.collection("users").doc(userId).collection("tasks").add(newTask);
-  
+    // const docRef = await addDoc(collection(db, "tasks"), {
+    //   finished: false,
+    //   text: newTask.text,
+    //   user: newTask.user
+    // });
+
     const tasksSnapshot = await db.collection("users").doc(userId).collection("tasks").get();
 
     // Mapping Firestore data to an array of task objects
@@ -86,11 +91,7 @@ app.post("/users/:userId/tasks", async (req, res) => {
       id: doc.id,
       ...doc.data(),
     }));
-    // const docRef = await addDoc(collection(db, "tasks"), {
-    //   finished: false,
-    //   text: newTask.text,
-    //   user: newTask.user
-    // });
+    
     
     // Sending a successful response with the tasks data
     console.log("tasks backend: "+tasks)

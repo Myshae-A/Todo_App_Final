@@ -257,14 +257,14 @@ export default function HomePage() {
             <List sx={{ marginTop: 3 }}>
               {taskList.map((task) => (
                 <ListItem
-                  key={task.name}
+                  key={task.id}
                   dense
                 >
                   <Checkbox
                     checked={task.finished}
                     onChange={() => toggleTaskCompletion(task)}
                   />
-                  <ListItemText primary={task.name} />
+                  <ListItemText primary={task.name || "unnamed task"} />
                 </ListItem>
               ))}
             </List>
