@@ -107,30 +107,7 @@ export default function HomePage() {
 
     // Function to compute a message indicating how many tasks are unfinished.
     function updateRendering(data) {
-      fetch(`https://todo-app-final-delta.vercel.app/users/${currentUser}/tasks`)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          // console.log(isMounted)
-          // console.log(data+"\n")
-          // if(isMounted.current && data.length > 0) {
-          if(data.length > 0) {
-            // currentUserRefresh = currentUser;
-            // console.log(currentUserRefresh)
-            setTaskList(data); // Update taskList with the fetched data
-            // isMounted = false;
-            // isMounted.current = false; // Prevent further updates
-            console.log("1.1 use effect here : "+data)
-          }
-          
-        })
-        .catch((error) => {
-          console.error("'use effect FAILED TO FETCH: ", error);
-        });
+      setTaskList(data)
     }
 
   // if (isLoading) {
