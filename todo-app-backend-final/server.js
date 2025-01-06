@@ -93,6 +93,7 @@ app.post("/users/:userId/tasks", async (req, res) => {
     // });
     
     // Sending a successful response with the tasks data
+    console.log("tasks backend: "+tasks)
     res.status(200).send(tasks);
 
     // res.status(201).json(tasks);
@@ -120,7 +121,8 @@ app.delete('/users/:userId/tasks/:taskId', async (req, res) => {
   // Delete the document with the given taskId
   await taskRef.delete();
   //tasks = tasks.filter(task => task.id !== taskId);
-  res.status(200).send(`taskId: ${taskId} is deleted!!!`);
+  res.status(200).send(taskRef);
+  // res.status(200).send(`taskId: ${taskId} is deleted!!!`);
 });
 
 // Setting the port for the server to listen on
