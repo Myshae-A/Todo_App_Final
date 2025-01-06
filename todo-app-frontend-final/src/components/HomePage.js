@@ -106,7 +106,7 @@ export default function HomePage() {
   }, [currentUser]);
 
     // Function to compute a message indicating how many tasks are unfinished.
-    function updateRendering() {
+    function updateRendering(data) {
       fetch(`https://todo-app-final-delta.vercel.app/users/${currentUser}/tasks`)
         .then((response) => {
           if (!response.ok) {
@@ -175,7 +175,7 @@ export default function HomePage() {
         // setCurrentUser(currentUserRefresh) // testing new Jan 2025
         // setNewTaskName("") // clears the input field
         //console.log("new task added -- passed through")
-        updateRendering();
+        updateRendering(taskList);
     } else if (taskList.some((task) => task.name === newTaskName)) {
       alert("Task already exists!");
     } else {
@@ -208,7 +208,7 @@ export default function HomePage() {
       // setRendering(rendering + 1)
       // setNewTaskName("")
       // setCurrentUser("gtDtrsA8tO7j2RpgGpo7")
-      updateRendering();
+      updateRendering(taskList);
       // setCurrentUser(currentUserRefresh) // testing new Jan 2025
   }
 
