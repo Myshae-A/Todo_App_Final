@@ -91,7 +91,7 @@ export default function HomePage() {
           // if(isMounted.current && data.length > 0) {
           if(data.length > 0) {
             currentUserRefresh = currentUser;
-            console.log(currentUserRefresh)
+            // console.log(currentUserRefresh)
             setTaskList(data); // Update taskList with the fetched data
             // isMounted = false;
             // isMounted.current = false; // Prevent further updates
@@ -143,6 +143,7 @@ export default function HomePage() {
         // setRefreshCount(refreshCount + 1)
         // setRendering(rendering + 1)
         // console.log("rendering: "+rendering)
+        setCurrentUser(currentUserRefresh) // testing new Jan 2025
         setNewTaskName("") // clears the input field
         //console.log("new task added -- passed through")
     } else if (taskList.some((task) => task.name === newTaskName)) {
@@ -175,6 +176,7 @@ export default function HomePage() {
       })
       // console.log("task deleted -- passed through")
       // setRendering(rendering + 1)
+      setCurrentUser(currentUserRefresh) // testing new Jan 2025
   }
 
   // Function to compute a message indicating how many tasks are unfinished.
