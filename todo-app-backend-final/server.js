@@ -84,18 +84,19 @@ app.post("/users/:userId/tasks", async (req, res) => {
     //   user: newTask.user
     // });
 
-    const tasksSnapshot = await db.collection("users").doc(userId).collection("tasks").get();
+    //const tasksSnapshot = await db.collection("users").doc(userId).collection("tasks").get();
 
     // Mapping Firestore data to an array of task objects
-    const tasks = tasksSnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-    
+    // const tasks = tasksSnapshot.docs.map(doc => ({
+    //   id: doc.id,
+    //   ...doc.data(),
+    // }));
+    const taskData = { id: docRef.id, ...newTask }; // Ensure task data includes the name
+    res.status(201).send(taskData);  // Send the complete task back
     
     // Sending a successful response with the tasks data
-    console.log("tasks backend: "+tasks)
-    res.status(200).send(tasks);
+    // console.log("tasks backend: "+tasks)
+    // res.status(200).send(tasks);
 
     // res.status(201).json(tasks);
     // Sending a successful response with the new task ID
