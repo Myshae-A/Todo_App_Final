@@ -75,16 +75,14 @@ app.post("/users/:userId/tasks", async (req, res) => {
     // console.log("starting try")
     const { userId } = req.params;
     
-    let tasks = [];
+    // let tasks = [];
     // Adding the new task to the "tasks" collection in Firestore
     const docRef = await db.collection("users").doc(userId).collection("tasks").add(newTask);
   
-    docRef.forEach((doc) => {
       tasks.push({
-        id: doc.id,
-        ...doc.data(),
+        id: docRef.id,
+        ...docRef.data(),
       });
-    });
     // const docRef = await addDoc(collection(db, "tasks"), {
     //   finished: false,
     //   text: newTask.text,
