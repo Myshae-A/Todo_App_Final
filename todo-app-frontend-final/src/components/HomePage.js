@@ -92,7 +92,7 @@ export default function HomePage() {
             setTaskList(data); // Update taskList with the fetched data
             // isMounted = false;
             // isMounted.current = false; // Prevent further updates
-            // console.log("use effect here : "+data)
+            console.log("1.0 use effect here : "+data)
           }
           
         })
@@ -130,6 +130,7 @@ export default function HomePage() {
         .then((response) => response.json())
         .then((data) => {
           setTaskList((prevTaskList) => [...prevTaskList, data]);
+          console.log("2.0 use effect here : "+data)
           // console.log("handle add tak : "+taskList)
         })
         .catch((error) => {
@@ -163,6 +164,7 @@ export default function HomePage() {
       .then(() => {
         const updatedTaskList = taskList.filter((existingTask) => existingTask.id !== task.id)
         setTaskList(updatedTaskList)
+        console.log("3.0 use effect here : "+updatedTaskList)
         // console.log("toggle task : "+taskList)
       })
       .catch((error) => {
