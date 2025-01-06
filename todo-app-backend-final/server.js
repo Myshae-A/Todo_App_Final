@@ -93,7 +93,7 @@ app.post("/users/:userId/tasks", async (req, res) => {
     // });
     
     // Sending a successful response with the tasks data
-    res.status(200).json(tasks);
+    res.status(200).send(tasks);
 
     // res.status(201).json(tasks);
     // Sending a successful response with the new task ID
