@@ -23,7 +23,7 @@ app.use(cors({
 // Your API routes will go here...
 app.use(express.json())
 
-let tasks = [];
+// let tasks = [];
 
 // app.use("/", (req, res) => {
 //   res.send("Server is running, hello world!");
@@ -42,7 +42,7 @@ app.get("/users/:userId/tasks", async (req, res) => {
     // Fetching all documents from the "tasks" collection in Firestore
     const snapshot = await db.collection("users").doc(userId).collection("tasks").get();
     
-    tasks = [];
+    let tasks = [];
     
     // Looping through each document and collecting data
     snapshot.forEach((doc) => {
@@ -79,10 +79,13 @@ app.post("/users/:userId/tasks", async (req, res) => {
     // Adding the new task to the "tasks" collection in Firestore
     const docRef = await db.collection("users").doc(userId).collection("tasks").add(newTask);
   
-      tasks.push({
-        id: docRef.id,
-        ...docRef.data(),
-      });
+    const tasksSnapshot = await db.collection("users").doc(userId).collection("tasks").get();
+
+    // Mapping Firestore data to an array of task objects
+    const tasks = tasksSnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
     // const docRef = await addDoc(collection(db, "tasks"), {
     //   finished: false,
     //   text: newTask.text,
@@ -90,7 +93,7 @@ app.post("/users/:userId/tasks", async (req, res) => {
     // });
     
     // Sending a successful response with the tasks data
-    res.status(200).send(tasks);
+    res.status(200).json(tasks);
 
     // res.status(201).json(tasks);
     // Sending a successful response with the new task ID
