@@ -10,6 +10,11 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json()); // must keep this...
 
+
+// enable CORS for specific routes or origins
+app.use(cors({
+  origin: 'https://todo-app-final-frontend.vercel.app' // Allow only this origin
+}));
 // const express = require('express');
 // const cors = require('cors');
 // const db = require('./firebase.js');
