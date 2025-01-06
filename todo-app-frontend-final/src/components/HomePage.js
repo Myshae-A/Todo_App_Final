@@ -106,9 +106,9 @@ export default function HomePage() {
   }, [currentUser]);
 
     // Function to compute a message indicating how many tasks are unfinished.
-    function updateRendering(data) {
-      setTaskList(data)
-    }
+    // function updateRendering(data) {
+    //   setTaskList(data)
+    // }
 
   // if (isLoading) {
   //   return <div>Loading...</div>; // Show a loading indicator
@@ -135,24 +135,24 @@ export default function HomePage() {
           // should always be false when adding a new task (i think)
         }),
       })
-        .then((response) => response.json())
-        .then((data) => {
-          setTaskList((prevTaskList) => [...prevTaskList, data]);
-          console.log("2.0 use effect here : "+data)
-          // console.log("handle add tak : "+taskList)
-        })
-        .catch((error) => {
-          // console.log("currentUser: "+currentUser)
-          // console.error('FAILED TO POST: ', error);
-        })
-        // setRefreshCount(refreshCount + 1)
-        // setRendering(rendering + 1)
-        // console.log("rendering: "+rendering)
-        // setCurrentUser("gtDtrsA8tO7j2RpgGpo7")
-        // setCurrentUser(currentUserRefresh) // testing new Jan 2025
-        // setNewTaskName("") // clears the input field
-        //console.log("new task added -- passed through")
-        updateRendering(taskList);
+      .then((response) => response.json())
+      .then((data) => {
+        setTaskList((prevTaskList) => [...prevTaskList, data]);
+        console.log("2.0 use effect here : "+data)
+        // console.log("handle add tak : "+taskList)
+      })
+      .catch((error) => {
+        console.log("currentUser: "+currentUser)
+        console.error('FAILED TO POST: ', error);
+      })
+      // setRefreshCount(refreshCount + 1)
+      // setRendering(rendering + 1)
+      // console.log("rendering: "+rendering)
+      // setCurrentUser("gtDtrsA8tO7j2RpgGpo7")
+      // setCurrentUser(currentUserRefresh) // testing new Jan 2025
+      setNewTaskName("") // clears the input field
+      //console.log("new task added -- passed through")
+      // updateRendering(taskList);
     } else if (taskList.some((task) => task.name === newTaskName)) {
       alert("Task already exists!");
     } else {
@@ -171,22 +171,22 @@ export default function HomePage() {
     fetch(`https://todo-app-final-delta.vercel.app/users/${currentUser}/tasks/${task.id}`, {
       method: 'DELETE'
     })
-      .then(response => response.json())
-      .then(() => {
-        const updatedTaskList = taskList.filter((existingTask) => existingTask.id !== task.id)
-        setTaskList(updatedTaskList)
-        console.log("3.0 use effect here : "+updatedTaskList)
-        // console.log("toggle task : "+taskList)
-      })
-      .catch((error) => {
-        // console.error('FAILED TO DELETE: ', error);
-      })
-      // console.log("task deleted -- passed through")
-      // setRendering(rendering + 1)
-      // setNewTaskName("")
-      // setCurrentUser("gtDtrsA8tO7j2RpgGpo7")
-      updateRendering(taskList);
-      // setCurrentUser(currentUserRefresh) // testing new Jan 2025
+    .then(response => response.json())
+    .then(() => {
+      const updatedTaskList = taskList.filter((existingTask) => existingTask.id !== task.id)
+      setTaskList(updatedTaskList)
+      console.log("3.0 use effect here : "+updatedTaskList)
+      // console.log("toggle task : "+taskList)
+    })
+    .catch((error) => {
+      console.error('FAILED TO DELETE: ', error);
+    })
+    // console.log("task deleted -- passed through")
+    // setRendering(rendering + 1)
+    // setNewTaskName("")
+    // setCurrentUser("gtDtrsA8tO7j2RpgGpo7")
+    // updateRendering(taskList);
+    // setCurrentUser(currentUserRefresh) // testing new Jan 2025
   }
 
   // Function to compute a message indicating how many tasks are unfinished.
