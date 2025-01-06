@@ -46,6 +46,7 @@ export default function HomePage() {
 
   const [isLoading, setIsLoading] = useState(true); // Track loading state
 
+  let currentUserRefresh = "";
   // let isMounted = true;
   // const isMounted = useRef(true);
 
@@ -89,6 +90,8 @@ export default function HomePage() {
           // console.log(data+"\n")
           // if(isMounted.current && data.length > 0) {
           if(data.length > 0) {
+            currentUserRefresh = currentUser;
+            console.log(currentUserRefresh)
             setTaskList(data); // Update taskList with the fetched data
             // isMounted = false;
             // isMounted.current = false; // Prevent further updates
