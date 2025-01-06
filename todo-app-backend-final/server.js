@@ -77,14 +77,26 @@ app.post("/users/:userId/tasks", async (req, res) => {
     
     // Adding the new task to the "tasks" collection in Firestore
     const docRef = await db.collection("users").doc(userId).collection("tasks").add(newTask);
+    const snapshot = await getDocs(docRef);
+    snapshot.forEach((doc) => {
+      tasks.push({
+        id: doc.id,
+        ...doc.data(),
+      });
+    });
     // const docRef = await addDoc(collection(db, "tasks"), {
     //   finished: false,
     //   text: newTask.text,
     //   user: newTask.user
     // });
+    
+    // Sending a successful response with the tasks data
+    // res.status(200).send(tasks);
+
+    res.status(201).json(tasks);
     // Sending a successful response with the new task ID
     //res.status(201).send("worked! "+{ id: docRef.id, ...newTask });
-    res.status(201).json({ id: docRef.id, ...newTask });
+    //res.status(201).json({ id: docRef.id, ...newTask });
     //console.log("ending try")
 
   } catch (error) {
