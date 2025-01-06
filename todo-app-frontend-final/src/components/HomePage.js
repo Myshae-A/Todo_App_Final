@@ -42,7 +42,7 @@ export default function HomePage() {
   // State for the task name being entered by the user.
   const [newTaskName, setNewTaskName] = useState("");
 
-  // const [rendering, setRendering] = useState(0);
+  const [rendering, setRendering] = useState(0);
 
   const [isLoading, setIsLoading] = useState(true); // Track loading state
 
@@ -103,7 +103,7 @@ export default function HomePage() {
           console.error("'use effect FAILED TO FETCH: ", error);
         });
       }
-  }, [currentUser]);
+  }, [currentUser, newTaskName]);
 
   // if (isLoading) {
   //   return <div>Loading...</div>; // Show a loading indicator
@@ -143,8 +143,8 @@ export default function HomePage() {
         // setRefreshCount(refreshCount + 1)
         // setRendering(rendering + 1)
         // console.log("rendering: "+rendering)
-        setCurrentUser("gtDtrsA8tO7j2RpgGpo7")
-        setCurrentUser(currentUserRefresh) // testing new Jan 2025
+        // setCurrentUser("gtDtrsA8tO7j2RpgGpo7")
+        // setCurrentUser(currentUserRefresh) // testing new Jan 2025
         setNewTaskName("") // clears the input field
         //console.log("new task added -- passed through")
     } else if (taskList.some((task) => task.name === newTaskName)) {
@@ -177,8 +177,9 @@ export default function HomePage() {
       })
       // console.log("task deleted -- passed through")
       // setRendering(rendering + 1)
-      setCurrentUser("gtDtrsA8tO7j2RpgGpo7")
-      setCurrentUser(currentUserRefresh) // testing new Jan 2025
+      setNewTaskName("")
+      // setCurrentUser("gtDtrsA8tO7j2RpgGpo7")
+      // setCurrentUser(currentUserRefresh) // testing new Jan 2025
   }
 
   // Function to compute a message indicating how many tasks are unfinished.
