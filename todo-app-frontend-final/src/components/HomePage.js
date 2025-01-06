@@ -42,11 +42,11 @@ export default function HomePage() {
   // State for the task name being entered by the user.
   const [newTaskName, setNewTaskName] = useState("");
 
-  const [rendering, setRendering] = useState(0);
+  // const [rendering, setRendering] = useState(0);
 
   const [isLoading, setIsLoading] = useState(true); // Track loading state
 
-  let currentUserRefresh = "";
+  // let currentUserRefresh = "";
   // let isMounted = true;
   // const isMounted = useRef(true);
 
@@ -90,7 +90,7 @@ export default function HomePage() {
           // console.log(data+"\n")
           // if(isMounted.current && data.length > 0) {
           if(data.length > 0) {
-            currentUserRefresh = currentUser;
+            // currentUserRefresh = currentUser;
             // console.log(currentUserRefresh)
             setTaskList(data); // Update taskList with the fetched data
             // isMounted = false;
@@ -103,7 +103,7 @@ export default function HomePage() {
           console.error("'use effect FAILED TO FETCH: ", error);
         });
       }
-  }, [currentUser, newTaskName]);
+  }, [currentUser]);
 
   // if (isLoading) {
   //   return <div>Loading...</div>; // Show a loading indicator
@@ -145,7 +145,7 @@ export default function HomePage() {
         // console.log("rendering: "+rendering)
         // setCurrentUser("gtDtrsA8tO7j2RpgGpo7")
         // setCurrentUser(currentUserRefresh) // testing new Jan 2025
-        setNewTaskName("") // clears the input field
+        // setNewTaskName("") // clears the input field
         //console.log("new task added -- passed through")
     } else if (taskList.some((task) => task.name === newTaskName)) {
       alert("Task already exists!");
@@ -177,7 +177,7 @@ export default function HomePage() {
       })
       // console.log("task deleted -- passed through")
       // setRendering(rendering + 1)
-      setNewTaskName("")
+      // setNewTaskName("")
       // setCurrentUser("gtDtrsA8tO7j2RpgGpo7")
       // setCurrentUser(currentUserRefresh) // testing new Jan 2025
   }
