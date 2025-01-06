@@ -77,7 +77,7 @@ export default function HomePage() {
     if (!isLoading && currentUser == null) {
       navigate('/login');
     } else {
-        fetch(`http://localhost:3001/users/${currentUser}/tasks`)
+        fetch(`http://todo-app-final-delta.vercel.app/users/${currentUser}/tasks`)
         .then((response) => {
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -115,7 +115,7 @@ export default function HomePage() {
       // In addition to updating the state directly, you should send a request
       // to the API to add a new task and then update the state based on the response.
       //console.log(currentUser.id);
-      fetch(`http://localhost:3001/users/${currentUser}/tasks`, {
+      fetch(`http://todo-app-final-delta.vercel.app/users/${currentUser}/tasks`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -156,7 +156,7 @@ export default function HomePage() {
     // Similar to adding tasks, when checking off a task, you should send a request
     // to the API to update the task's status and then update the state based on the response.
 
-    fetch(`http://localhost:3001/users/${currentUser}/tasks/${task.id}`, {
+    fetch(`http://todo-app-final-delta.vercel.app/users/${currentUser}/tasks/${task.id}`, {
       method: 'DELETE'
     })
       .then(response => response.json())
