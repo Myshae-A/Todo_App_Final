@@ -105,6 +105,34 @@ export default function HomePage() {
       }
   }, [currentUser]);
 
+    // Function to compute a message indicating how many tasks are unfinished.
+    function updateRendering() {
+      fetch(`https://todo-app-final-delta.vercel.app/users/${currentUser}/tasks`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // console.log(isMounted)
+          // console.log(data+"\n")
+          // if(isMounted.current && data.length > 0) {
+          if(data.length > 0) {
+            // currentUserRefresh = currentUser;
+            // console.log(currentUserRefresh)
+            setTaskList(data); // Update taskList with the fetched data
+            // isMounted = false;
+            // isMounted.current = false; // Prevent further updates
+            console.log("1.1 use effect here : "+data)
+          }
+          
+        })
+        .catch((error) => {
+          console.error("'use effect FAILED TO FETCH: ", error);
+        });
+    }
+
   // if (isLoading) {
   //   return <div>Loading...</div>; // Show a loading indicator
   // }
@@ -147,6 +175,7 @@ export default function HomePage() {
         // setCurrentUser(currentUserRefresh) // testing new Jan 2025
         // setNewTaskName("") // clears the input field
         //console.log("new task added -- passed through")
+        updateRendering();
     } else if (taskList.some((task) => task.name === newTaskName)) {
       alert("Task already exists!");
     } else {
@@ -179,6 +208,7 @@ export default function HomePage() {
       // setRendering(rendering + 1)
       // setNewTaskName("")
       // setCurrentUser("gtDtrsA8tO7j2RpgGpo7")
+      updateRendering();
       // setCurrentUser(currentUserRefresh) // testing new Jan 2025
   }
 
