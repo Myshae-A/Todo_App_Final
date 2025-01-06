@@ -1,15 +1,10 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "api/**/*.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/api/users/([^/]+)/tasks",
-        "dest": "/api/users/[userId]/tasks.js"
-      }
-    ]
-  }
+  "version": 2,
+  "name": "todo-app-backend-final",
+  "builds": [
+    { "src": "server.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "server.js" }
+  ]
+}
