@@ -42,12 +42,12 @@ export default function HomePage() {
   // State for the task name being entered by the user.
   const [newTaskName, setNewTaskName] = useState("");
 
-  const [rendering, setRendering] = useState(0);
+  // const [rendering, setRendering] = useState(0);
 
   const [isLoading, setIsLoading] = useState(true); // Track loading state
 
   // let isMounted = true;
-  const isMounted = useRef(true);
+  // const isMounted = useRef(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -91,7 +91,7 @@ export default function HomePage() {
           if(data.length > 0) {
             setTaskList(data); // Update taskList with the fetched data
             // isMounted = false;
-            isMounted.current = false; // Prevent further updates
+            // isMounted.current = false; // Prevent further updates
             // console.log("use effect here : "+data)
           }
           
@@ -100,7 +100,7 @@ export default function HomePage() {
           console.error("'use effect FAILED TO FETCH: ", error);
         });
     }
-  }, [currentUser, rendering]);
+  }, [currentUser]);
 
   // if (isLoading) {
   //   return <div>Loading...</div>; // Show a loading indicator
@@ -137,7 +137,7 @@ export default function HomePage() {
           // console.error('FAILED TO POST: ', error);
         })
         // setRefreshCount(refreshCount + 1)
-        setRendering(rendering + 1)
+        // setRendering(rendering + 1)
         // console.log("rendering: "+rendering)
         setNewTaskName("") // clears the input field
         //console.log("new task added -- passed through")
@@ -169,7 +169,7 @@ export default function HomePage() {
         // console.error('FAILED TO DELETE: ', error);
       })
       // console.log("task deleted -- passed through")
-      setRendering(rendering + 1)
+      // setRendering(rendering + 1)
   }
 
   // Function to compute a message indicating how many tasks are unfinished.
