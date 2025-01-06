@@ -78,6 +78,7 @@ export default function HomePage() {
     if (!isLoading && currentUser == null) {
       navigate('/login');
     } else {
+      if(currentUser !== " ") {
         fetch(`https://todo-app-final-delta.vercel.app/users/${currentUser}/tasks`)
         .then((response) => {
           if (!response.ok) {
@@ -102,6 +103,7 @@ export default function HomePage() {
         .catch((error) => {
           console.error("'use effect FAILED TO FETCH: ", error);
         });
+      }
     }
   }, [currentUser]);
 
@@ -143,7 +145,7 @@ export default function HomePage() {
         // setRefreshCount(refreshCount + 1)
         // setRendering(rendering + 1)
         // console.log("rendering: "+rendering)
-        setCurrentUser("")
+        setCurrentUser(" ")
         setCurrentUser(currentUserRefresh) // testing new Jan 2025
         setNewTaskName("") // clears the input field
         //console.log("new task added -- passed through")
@@ -177,7 +179,7 @@ export default function HomePage() {
       })
       // console.log("task deleted -- passed through")
       // setRendering(rendering + 1)
-      setCurrentUser("")
+      setCurrentUser(" ")
       setCurrentUser(currentUserRefresh) // testing new Jan 2025
   }
 
